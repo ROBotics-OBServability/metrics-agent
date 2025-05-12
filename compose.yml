@@ -1,0 +1,42 @@
+services:
+  collector:
+    image: otel/opentelemetry-collector-contrib
+    ports:
+      - 1888:1888 # pprof extension
+      - 8888:8888 # Prometheus metrics exposed by the Collector
+      - 8889:8889 # Prometheus exporter metrics
+      - 13133:13133 # health_check extension
+      - 4317:4317 # OTLP gRPC receiver
+      - 4318:4318 # OTLP http receiver
+      - 55679:55679 # zpages extension
+    volumes:
+      - ./collector.yml:/etc/otelcol-contrib/config.yaml
+
+  glances:    
+    environment:
+      - "GLANCES_OPT=-w"
+    build:
+      context: .
+      dockerfile: glances.Dockerfile
+    labels:
+      - "traefik.port=61208"
+      - "traefik.frontend.rule=Host:glances.docker.localhost"
+    pid: host
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /etc/os-release:/etc/os-release:ro # display OS host information
+
+  traefik:
+    command: --api --docker
+    image: traefik:alpine
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  whoami:
+    image: emilevauge/whoami
+    labels:
+      - "traefik.frontend.rule=Host:whoami.docker.localhost"
