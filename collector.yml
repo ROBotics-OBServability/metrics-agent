@@ -3,10 +3,10 @@ receivers:
 
 exporters:
   logging:
-    loglevel: debug
+    loglevel: "debug"
 
 service:
   pipelines:
     metrics:
-      receivers: [prometheus]
-      exporters: [logging]
+      receivers: ["prometheus"]
+      exporters: ["logging"]
