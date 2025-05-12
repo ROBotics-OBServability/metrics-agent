@@ -1,0 +1,12 @@
+receivers:
+  prometheus:
+
+exporters:
+  logging:
+    loglevel: debug
+
+service:
+  pipelines:
+    metrics:
+      receivers: [prometheus]
+      exporters: [logging]

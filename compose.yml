@@ -27,6 +27,15 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - /etc/os-release:/etc/os-release:ro # display OS host information
 
+  prometheus:
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+
   traefik:
     command: --api --docker
     image: traefik:alpine
