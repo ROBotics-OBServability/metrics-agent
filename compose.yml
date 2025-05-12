@@ -1,38 +1,37 @@
 services:
   collector:
-    image: otel/opentelemetry-collector-contrib
+    image: "otel/opentelemetry-collector-contrib"
     ports:
-      - 1888:1888 # pprof extension
-      - 8888:8888 # Prometheus metrics exposed by the Collector
-      - 8889:8889 # Prometheus exporter metrics
-      - 13133:13133 # health_check extension
-      - 4317:4317 # OTLP gRPC receiver
-      - 4318:4318 # OTLP http receiver
-      - 55679:55679 # zpages extension
+      - "1888:1888" # pprof extension
+      - "8888:8888" # Prometheus metrics exposed by the Collector
+      - "8889:8889" # Prometheus exporter metrics
+      - "13133:13133" # health_check extension
+      - "4317:4317" # OTLP gRPC receiver
+      - "4318:4318" # OTLP http receiver
+      - "55679:55679" # zpages extension
     volumes:
-      - ./collector.yml:/etc/otelcol-contrib/config.yaml
+      - "./collector.yml:/etc/otelcol-contrib/config.yaml"
 
   glances:
     environment:
-      #- "TZ=${TZ}"
       - "GLANCES_OPT=--config /etc/glances.conf --export prometheus --quiet"
-    image: nicolargo/glances:ubuntu-latest-full
+    image: "nicolargo/glances:ubuntu-latest-full"
     pid: "host"
     ports:
       - "61208:61208" # Glances web UI
       - "61209:61209" # Glances API
       - "9091:9091" # Glances metrics
-    restart: always
+    restart: "always"
     volumes:
-      - ./glances.conf:/etc/glances.conf
-      - /var/run/docker.sock:/var/run/docker.sock
-      - /etc/os-release:/etc/os-release:ro # display OS host information
+      - "./glances.conf:/etc/glances.conf"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "/etc/os-release:/etc/os-release:ro" # display OS host information
 
   prometheus:
     command:
       - "--config.file=/etc/prometheus/prometheus.yml"
-    image: prom/prometheus:latest
+    image: "prom/prometheus:latest"
     ports:
       - "9090:9090"
     volumes:
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - "./prometheus.yml:/etc/prometheus/prometheus.yml"
