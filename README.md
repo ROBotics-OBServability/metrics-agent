@@ -8,10 +8,12 @@ git clone https://github.com/trwa/robs.git && cd robs
 sudo docker compose up -d
 ```
 
-Visit [http://localhost:9091/metrics](http://localhost:9091/metrics)
+```bash
+sudo docker compose logs collector -f
+```
 
+## More data
 
-## Services
+Visit [http://localhost:9091/metrics](http://localhost:9091/metrics) to inspect raw data from glances.
 
-* **collector**: [OpenTelemetry](https://opentelemetry.io/docs/what-is-opentelemetry/) collector
-* **glances**: [Glances](https://glances.readthedocs.io/en/latest/index.html) monitoring tool
+Visit [http://localhost:9090](http://localhost:9090) to inspect Prometheus (**TODO**: remove).
