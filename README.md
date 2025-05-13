@@ -8,6 +8,8 @@ git clone https://github.com/trwa/robs.git && cd robs
 sudo docker compose up -d
 ```
 
+See the metrics from the OpenTelemetry collector:
+
 ```bash
 sudo docker compose logs collector -f
 ```
