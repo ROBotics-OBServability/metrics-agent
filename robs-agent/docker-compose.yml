@@ -10,7 +10,7 @@ services:
       - "4318:4318" # OTLP http receiver
       - "55679:55679" # zpages extension
     volumes:
-      - "./collector.yml:/etc/otelcol-contrib/config.yaml"
+      - "./config/collector.yml:/etc/otelcol-contrib/config.yaml"
 
   glances:
     environment:
@@ -23,7 +23,7 @@ services:
       - "9091:9091" # Glances metrics
     restart: "always"
     volumes:
-      - "./glances.conf:/etc/glances.conf"
+      - "./config/glances.conf:/etc/glances.conf"
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "/etc/os-release:/etc/os-release:ro" # display OS host information
 
@@ -34,4 +34,4 @@ services:
     ports:
       - "9090:9090"
     volumes:
-      - "./prometheus.yml:/etc/prometheus/prometheus.yml"
+      - "./config/prometheus.yml:/etc/prometheus/prometheus.yml"

