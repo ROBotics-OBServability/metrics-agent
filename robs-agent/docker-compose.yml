@@ -10,7 +10,7 @@ services:
       - "4318:4318" # OTLP http receiver
       - "55679:55679" # zpages extension
     volumes:
-      - "./config/collector.yml:/etc/otelcol-contrib/config.yaml"
+      - "./opentelemetry-collector/config.yml:/etc/otelcol-contrib/config.yaml"
 
   glances:
     environment:
@@ -28,10 +28,12 @@ services:
       - "/etc/os-release:/etc/os-release:ro" # display OS host information
 
   prometheus:
+    build:
+      context: .
+      dockerfile: ./prometheus/Dockerfile
     command:
-      - "--config.file=/etc/prometheus/prometheus.yml"
-    image: "prom/prometheus:latest"
+      - --config.file=/etc/prometheus/config.yml
     ports:
-      - "9090:9090"
+      - 9090:9090/tcp
     volumes:
-      - "./config/prometheus.yml:/etc/prometheus/prometheus.yml"
+      - ./prometheus/config.yml:/etc/prometheus/config.yml
