@@ -13,19 +13,21 @@ services:
       - "./opentelemetry-collector/config.yml:/etc/otelcol-contrib/config.yaml"
 
   glances:
+    build:
+      context: .
+      dockerfile: ./glances/Dockerfile
     environment:
       - "GLANCES_OPT=--config /etc/glances.conf --export prometheus --quiet"
-    image: "nicolargo/glances:ubuntu-latest-full"
-    pid: "host"
+    pid: host
     ports:
-      - "61208:61208" # Glances web UI
-      - "61209:61209" # Glances API
-      - "9091:9091" # Glances metrics
-    restart: "always"
+      - 61208:61208 # Glances web UI
+      - 61209:61209 # Glances API
+      - 9091:9091 # Glances metrics
+    restart: always
     volumes:
-      - "./glances/glances.conf:/etc/glances.conf"
-      - "/var/run/docker.sock:/var/run/docker.sock"
-      - "/etc/os-release:/etc/os-release:ro" # display OS host information
+      - ./glances/glances.conf:/etc/glances.conf
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /etc/os-release:/etc/os-release:ro # display OS host information
 
   prometheus:
     build:
