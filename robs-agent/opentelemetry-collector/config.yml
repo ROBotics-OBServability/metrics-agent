@@ -2,17 +2,18 @@ receivers:
   prometheus:
     config:
       scrape_configs:
-      - job_name: "glances_exporter"
-        scrape_interval: "5s"
-        static_configs:
-          - targets: ["glances:9091"]
+        - job_name: glances_exporter
+          scrape_interval: 5s
+          static_configs:
+            - targets:
+                - glances:9091
 
 exporters:
   debug:
-    verbosity: "detailed"
+    verbosity: detailed
 
 service:
   pipelines:
     metrics:
-      receivers: ["prometheus"]
-      exporters: ["debug"]
+      receivers: [prometheus]
+      exporters: [debug]

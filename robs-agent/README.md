@@ -11,7 +11,7 @@ sudo docker compose up -d
 To see the metrics from the OpenTelemetry collector:
 
 ```bash
-sudo docker compose logs collector -f
+sudo docker compose logs opentelemetry-collector -f
 ```
 
 ## More data
