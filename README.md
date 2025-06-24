@@ -1,5 +1,15 @@
 # Robs Agent
 
+## TODO
+
+* [ ] Script installazione 
+* [ ] Otel collector deve comunicare verso fuori (altro otel collector)
+* [ ] Aggiungere raccolta dei log (Loki)
+* [ ] Rimpiazzare glances con node_exporter+process-exporter
+* [ ] Migrare da docker a qualcosa di meglio
+
+---
+
 This module contains the software stack needed to extract metrics from a machine. It should serves as a gateway to push metrics, logs and more.
 
 To spin up all services:
