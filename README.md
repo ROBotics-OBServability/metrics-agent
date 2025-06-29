@@ -1,31 +1,22 @@
-# Robs Agent
+# ROBS Metrics Agent
 
-## TODO
-
-* [x] Script installazione (Testato. NOTA: per il momento, non installa Docker ma è il prossimo TODO)
-* [ ] Otel collector deve comunicare verso fuori (altro otel collector)
-* [ ] Aggiungere raccolta dei log (Loki)
-* [ ] Rimpiazzare glances con node_exporter+process-exporter
-* [ ] Migrare da docker a qualcosa di meglio
-
----
-
-This module contains the software stack needed to extract metrics from a machine. It should serves as a gateway to push metrics, logs and more.
-
-To spin up all services:
+## Get started
 
 ```bash
-sudo docker compose up -d
+curl https://raw.githubusercontent.com/ROBotics-OBServability/metrics-agent/b311af468372577bac4f0084e8988bb09e49e683/setup.sh | bash
 ```
 
-To see the metrics from the OpenTelemetry collector:
+At the moment, to see the metrics from the OTEL collector you can do:
 
 ```bash
+cd ~/metrics-agent
 sudo docker compose logs opentelemetry-collector -f
 ```
 
-## More data
+## TODO
 
-Visit [http://localhost:9091/metrics](http://localhost:9091/metrics) to inspect raw data from glances.
-
-Visit [http://localhost:9090](http://localhost:9090) to inspect Prometheus (**TODO**: remove).
+* [x] Installation script
+* [ ] Make OTEL collector communicate to the outside
+* [ ] Add Loki for log collection
+* [ ] Replace glances with node_exporter + process-exporter
+* [ ] Migrate from Docker to something else
