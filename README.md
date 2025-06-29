@@ -2,7 +2,7 @@
 
 ## TODO
 
-* [ ] Script installazione 
+* [x] Script installazione (Testato. NOTA: per il momento, non installa Docker ma è il prossimo TODO)
 * [ ] Otel collector deve comunicare verso fuori (altro otel collector)
 * [ ] Aggiungere raccolta dei log (Loki)
 * [ ] Rimpiazzare glances con node_exporter+process-exporter
